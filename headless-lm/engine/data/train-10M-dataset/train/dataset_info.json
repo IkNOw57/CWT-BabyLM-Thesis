@@ -1,0 +1,64 @@
+{
+  "builder_name": "text",
+  "citation": "",
+  "config_name": "default",
+  "dataset_name": "text",
+  "dataset_size": 57888441,
+  "description": "",
+  "download_checksums": {
+    "C:/Course_Data/Thesis-voorbereiding/headless-lm/engine/data/train_10M/childes.train": {
+      "num_bytes": 15485295,
+      "checksum": null
+    },
+    "C:/Course_Data/Thesis-voorbereiding/headless-lm/engine/data/train_10M/bnc_spoken.train": {
+      "num_bytes": 4884146,
+      "checksum": null
+    },
+    "C:/Course_Data/Thesis-voorbereiding/headless-lm/engine/data/train_10M/gutenberg.train": {
+      "num_bytes": 14001510,
+      "checksum": null
+    },
+    "C:/Course_Data/Thesis-voorbereiding/headless-lm/engine/data/train_10M/open_subtitles.train": {
+      "num_bytes": 10828244,
+      "checksum": null
+    },
+    "C:/Course_Data/Thesis-voorbereiding/headless-lm/engine/data/train_10M/simple_wiki.train": {
+      "num_bytes": 8432882,
+      "checksum": null
+    },
+    "C:/Course_Data/Thesis-voorbereiding/headless-lm/engine/data/train_10M/switchboard.train": {
+      "num_bytes": 719322,
+      "checksum": null
+    }
+  },
+  "download_size": 54351399,
+  "features": {
+    "text": {
+      "dtype": "string",
+      "_type": "Value"
+    }
+  },
+  "homepage": "",
+  "license": "",
+  "size_in_bytes": 112239840,
+  "splits": {
+    "train": {
+      "name": "train",
+      "num_bytes": 48487237,
+      "num_examples": 1096014,
+      "dataset_name": "text"
+    },
+    "test": {
+      "name": "test",
+      "num_bytes": 9401204,
+      "num_examples": 83000,
+      "dataset_name": "text"
+    }
+  },
+  "version": {
+    "version_str": "0.0.0",
+    "major": 0,
+    "minor": 0,
+    "patch": 0
+  }
+}
