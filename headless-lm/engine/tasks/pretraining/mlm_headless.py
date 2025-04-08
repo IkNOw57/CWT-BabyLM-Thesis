@@ -138,7 +138,7 @@ class MlmHeadlessPretraining(Task):
         # get generator output and get mlm loss
         mlm_result = self.mlm_model(masked_input, output_hidden_states=True)
 
-        if self.emb_loss_weight != 0:
+        if self.emb_loss_weight != 0: #wanneer wordt deze aangepast???
             last_hidden_state = mlm_result.hidden_states[-1][mask]
             emb_prediction = self.emb_predictor(last_hidden_state)
 
