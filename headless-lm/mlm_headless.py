@@ -28,6 +28,7 @@ parser.add_argument('--ckpt_path', nargs='?', const=None, type=str)
 
 parser.add_argument('--saved_ckpt_path')
 parser.add_argument("--ckpt_every", default=10000)
+parser.add_argument("--max_epochs",default=1000) #added myself
 
 args = parser.parse_args()
 
@@ -46,6 +47,7 @@ hf_path = args.hf_path
 accelerator = args.accelerator
 precision = args.precision
 ckpt_every = args.ckpt_every
+max_epochs = args.max_epochs #added myself
 
 saved_ckpt_path = args.saved_ckpt_path
 
@@ -106,4 +108,5 @@ trainer.fit(
   benchmark=True,
   default_root_dir=f'{saved_ckpt_path}/{version_name}',
   ckpt_path=ckpt_path,
+  max_epochs=max_epochs,#added myself
 )
