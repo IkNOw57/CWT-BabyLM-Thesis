@@ -1,0 +1,175 @@
+_wandb:
+    value:
+        cli_version: 0.19.8
+        m:
+            - "1": rte/train/accuracy
+              "5": 2
+              "6":
+                - 1
+                - 3
+              "7": []
+            - "1": trainer/global_step
+              "6":
+                - 3
+              "7": []
+            - "1": rte/optimization/learning_rate
+              "5": 2
+              "6":
+                - 1
+                - 3
+              "7": []
+            - "1": rte/val/f1_score
+              "5": 2
+              "6":
+                - 1
+                - 3
+              "7": []
+            - "1": rte/val/samples.path
+              "5": 2
+              "6":
+                - 1
+                - 3
+              "7": []
+            - "1": rte/train/f1_score
+              "5": 2
+              "6":
+                - 1
+                - 3
+              "7": []
+            - "1": epoch
+              "5": 2
+              "6":
+                - 1
+                - 3
+              "7": []
+            - "1": rte/train/total_loss
+              "5": 2
+              "6":
+                - 1
+                - 3
+              "7": []
+            - "1": rte/val/total_loss
+              "5": 2
+              "6":
+                - 1
+                - 3
+              "7": []
+            - "1": rte/val/accuracy
+              "5": 2
+              "6":
+                - 1
+                - 3
+              "7": []
+            - "1": rte/val/samples.size
+              "5": 2
+              "6":
+                - 1
+                - 3
+              "7": []
+            - "1": rte/val/samples._type
+              "5": 2
+              "6":
+                - 1
+                - 3
+              "7": []
+            - "1": rte/val/samples.sha256
+              "5": 2
+              "6":
+                - 1
+                - 3
+              "7": []
+        python_version: 3.11.11
+        t:
+            "1":
+                - 1
+                - 2
+                - 3
+                - 5
+                - 9
+                - 11
+                - 41
+                - 49
+                - 51
+                - 53
+                - 55
+                - 71
+                - 103
+                - 105
+            "2":
+                - 1
+                - 2
+                - 3
+                - 5
+                - 9
+                - 11
+                - 41
+                - 49
+                - 51
+                - 53
+                - 55
+                - 71
+                - 103
+                - 105
+            "3":
+                - 7
+                - 23
+                - 55
+                - 66
+            "4": 3.11.11
+            "5": 0.19.8
+            "6": 4.49.0
+            "8":
+                - 3
+                - 5
+            "12": 0.19.8
+            "13": windows-amd64
+backbone:
+    value: bert-base-cased
+backbone_lr:
+    value: 1e-05
+call_super_init:
+    value: false
+dataset:
+    value: glue
+dropout:
+    value: 0.1
+head:
+    value: Sequential
+head_lr:
+    value: 1e-05
+hp/cola_score:
+    value: -1
+hp/mnli_score:
+    value: -1
+hp/mrpc_score:
+    value: -1
+hp/qnli_score:
+    value: -1
+hp/qqp_score:
+    value: -1
+hp/rte_score:
+    value: -1
+hp/sst2_score:
+    value: -1
+hp/stsb_score:
+    value: -1
+mask_token_id:
+    value: 2
+max_seq_len:
+    value: 128
+num_class:
+    value: 2
+pad_token_id:
+    value: 0
+pooling:
+    value: cls
+task:
+    value: SentencePairClassification
+train_batch_size:
+    value: 32
+val_batch_size:
+    value: 32
+warmup_steps:
+    value: 160
+weight_decay:
+    value: 0

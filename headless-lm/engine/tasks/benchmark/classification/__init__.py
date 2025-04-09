@@ -1,2 +1,2 @@
-from engine.tasks.classification.nli import SentencePairClassification
-from engine.tasks.classification.sentence import SentenceClassification
+from engine.tasks.benchmark.classification.nli import SentencePairClassification
+from engine.tasks.benchmark.classification.sentence import SentenceClassification

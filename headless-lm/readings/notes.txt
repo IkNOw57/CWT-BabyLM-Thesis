@@ -15,3 +15,7 @@ accelerator: handles the devices used??
 
 
 \tasks\pretraining\mlm_headless.py: if self.emb_loss_weight != 0: #wanneer wordt deze aangepast???
+
+GlueBenchmark: TypeError: GlueBenchmark.__init__() got an unexpected keyword argument 'weighted_ce'
+
+RuntimeError: Distributed package doesn't have NCCL built in

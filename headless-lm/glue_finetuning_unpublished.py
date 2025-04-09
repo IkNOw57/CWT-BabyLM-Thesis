@@ -10,11 +10,9 @@ import argparse
 
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--hf_name")
 parser.add_argument("--model_ckpt")
 parser.add_argument("--mode")
 args = parser.parse_args()
-hf_name = args.hf_name
 model_ckpt = args.model_ckpt
 mode = args.mode
 
@@ -30,8 +28,11 @@ backbone = model
 
 
 
+def main():
+    GlueBenchmark(
+        tokenizer, backbone, logger='wandb', logger_args={'project': 'GLUE'}, train_batch_size=32, accumulate_grad_batches=1,
+        learning_rate=1e-5
+    ) #,weighted_ce=True, weight_decay=0.01, shuffle=True
 
-GlueBenchmark(
-    tokenizer, backbone, logger='wandb', logger_args={'project': 'GLUE'}, train_batch_size=32, accumulate_grad_batches=1,
-    learning_rate=1e-5, weighted_ce=True, weight_decay=0.01, shuffle=True
-)
+if __name__ =='__main__':
+    main()

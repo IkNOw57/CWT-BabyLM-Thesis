@@ -1,4 +1,4 @@
-from engine.tasks.classification import SentenceClassification, SentencePairClassification
+from engine.tasks.benchmark.classification import SentenceClassification, SentencePairClassification
 from engine.tasks.regression.sts import TextualSimilarity
 from engine.data import DataModule
 from engine.lit.lightning_module import TaskTrainer
@@ -87,7 +87,6 @@ _GLUE_TASK_CONFIG = {
     },
 }
 
-
 class GlueBenchmark:
     def __init__(self, tokenizer, backbone, train_batch_size=8, infer_batch_size=32,
                  accumulate_grad_batches=4, version=None, logger='tensorboard', logger_args=None,
@@ -133,13 +132,12 @@ class GlueBenchmark:
             task_metric = task_attr.get('metric', 'accuracy')
             checkpoint_callback = ModelCheckpoint(monitor=f'{task_name}/val/{task_metric}', mode='max',
                                                   save_top_k=0)
-            trainer.fit(task_datamodule, gpus=4, num_nodes=1, strategy="ddp",
+            trainer.fit(task_datamodule, num_nodes=1, 
                         accumulate_grad_batches=self.accumulate_grad_batches,
                         callbacks=[checkpoint_callback],
-                        max_epochs=task_attr.get('nb_epochs', 10))
+                        max_epochs=10)# changed strategy to ddp_spawn #unexpected argument GPUS (task_datamodule,gpus=4, num_nodes=1)
             best_score = checkpoint_callback.best_model_score
             if best_score:
                 self.logger.log_metrics({f'hp/{task_name}_score': best_score.item()})
-
     def fit(self):
         self()
