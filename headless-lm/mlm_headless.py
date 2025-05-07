@@ -46,7 +46,7 @@ run_name = args.run_name
 hf_path = args.hf_path
 accelerator = args.accelerator
 precision = args.precision
-ckpt_every = args.ckpt_every
+ckpt_every = int(args.ckpt_every)
 max_epochs = args.max_epochs #added myself
 
 saved_ckpt_path = args.saved_ckpt_path
@@ -106,7 +106,7 @@ trainer.fit(
   val_check_interval=0.1,
   gradient_clip_val=1.0,
   benchmark=True,
-  default_root_dir=f'{saved_ckpt_path}/{version_name}',
-  ckpt_path=ckpt_path,
-  max_epochs=max_epochs,#added myself
+  default_root_dir=f'{run_name}{saved_ckpt_path}/{version_name}',
+  ckpt_path=ckpt_path#,
+  # max_epochs=max_epochs,#added myself
 )
