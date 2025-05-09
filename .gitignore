@@ -166,3 +166,4 @@ imgs/
 readings/
 BabyLM-corpus-strict-small.txt
 TM Methods Subword Tokenizers.ipynb
+headless-venv/
