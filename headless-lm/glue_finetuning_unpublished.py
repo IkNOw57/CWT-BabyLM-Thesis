@@ -16,7 +16,7 @@ args = parser.parse_args()
 model_ckpt = args.model_ckpt
 mode = args.mode
 
-task_trainer = TaskTrainer.load_from_checkpoint(model_ckpt, map_location="cpu")
+task_trainer = TaskTrainer.load_from_checkpoint(model_ckpt,weights_only=True, map_location="cpu")
 tokenizer = task_trainer.task.tokenizer
 
 if mode == "mlm":

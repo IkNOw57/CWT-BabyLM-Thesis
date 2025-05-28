@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Insights in Computational Lexicology</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            overflow: hidden;
+        }
+        
+        .presentation-container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+        
+        .slide {
+            width: 100%;
+            height: 100%;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: absolute;
+            top: 0;
+            left: 0;
+            animation: slideIn 0.6s ease-out;
+        }
+        
+        .slide.active {
+            display: flex;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .slide h1 {
+            font-size: 3.5em;
+            font-weight: 300;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            text-align: center;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .slide h2 {
+            font-size: 2.8em;
+            font-weight: 400;
+            color: #34495e;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        
+        .slide h3 {
+            font-size: 2.2em;
+            color: #2980b9;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .slide p, .slide li {
+            font-size: 1.4em;
+            line-height: 1.6;
+            color: #555;
+            max-width: 900px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .slide ul {
+            list-style: none;
+            max-width: 900px;
+        }
+        
+        .slide li {
+            margin-bottom: 15px;
+            padding-left: 30px;
+            position: relative;
+            text-align: left;
+        }
+        
+        .slide li::before {
+            content: "▶";
+            position: absolute;
+            left: 0;
+            color: #3498db;
+            font-weight: bold;
+        }
+        
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 500;
+            color: #2c3e50;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-btn:hover {
+            background: #3498db;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.3);
+        }
+        
+        .slide-counter {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 1.1em;
+            font-weight: 500;
+            color: #2c3e50;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.1), rgba(155, 89, 182, 0.1));
+            border-left: 4px solid #3498db;
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 10px;
+            max-width: 900px;
+        }
+        
+        .methodology-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            max-width: 1000px;
+            margin: 20px 0;
+        }
+        
+        .method-card {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border: 2px solid #ecf0f1;
+        }
+        
+        .method-card h4 {
+            color: #2980b9;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+        }
+        
+        .stats-container {
+            display: flex;
+            justify-content: space-around;
+            gap: 30px;
+            max-width: 800px;
+            margin: 30px 0;
+        }
+        
+        .stat-box {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            min-width: 150px;
+        }
+        
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #e74c3c;
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 1.1em;
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <!-- Slide 1: Title -->
+        <div class="slide active">
+            <h1>New Insights in Computational Lexicology</h1>
+            <p style="font-size: 1.8em; color: #7f8c8d; margin: 30px 0;">Master Thesis Presentation</p>
+            <p style="font-size: 1.4em; color: #95a5a6;">Ino van de Wouw</p>
+            <p style="font-size: 1.2em; color: #bdc3c7;">Supervisor: Antske Fokkens | 2nd Reader: Pia Sommerauer</p>
+            <p style="font-size: 1.1em; color: #bdc3c7; margin-top: 40px;">MA Linguistics (Text Mining) | Vrije Universiteit Amsterdam</p>
+        </div>
+
+        <!-- Slide 2: Overview -->
+        <div class="slide">
+            <h2>Research Overview</h2>
+            <div class="highlight-box">
+                <p style="font-size: 1.6em; color: #2c3e50; font-weight: 500;">Investigating the power of headless language models in sample-efficient learning environments</p>
+            </div>
+            <ul>
+                <li>Comparative analysis of headless vs. vanilla language models</li>
+                <li>Focus on Contrastive Weight Tying (CWT) pre-training objective</li>
+                <li>Evaluation using BabyLM Challenge datasets</li>
+                <li>Testing both MLM and GPT architectures</li>
+                <li>Assessment through BLiMP and GLUE benchmarks</li>
+            </ul>
+        </div>
+
+        <!-- Slide 3: Background - Headless Language Modeling -->
+        <div class="slide">
+            <h2>Headless Language Modeling</h2>
+            <h3>Contrastive Weight Tying (CWT)</h3>
+            <div class="highlight-box">
+                <p><strong>Key Innovation:</strong> Maintains alignment between input embeddings and output projections throughout training</p>
+            </div>
+            <ul>
+                <li>Deviation from traditional MLM and Next Token Prediction approaches</li>
+                <li>Bidirectional mapping between word embeddings and output projections</li>
+                <li>Contrastive framework treating correct pairs as positive examples</li>
+                <li>Inspired by successful contrastive methods like SimCLR and CLIP</li>
+            </ul>
+        </div>
+
+        <!-- Slide 4: BabyLM Challenge -->
+        <div class="slide">
+            <h2>BabyLM Challenge</h2>
+            <h3>Sample-Efficient Pre-training</h3>
+            <div class="stats-container">
+                <div class="stat-box">
+                    <span class="stat-number">10M</span>
+                    <span class="stat-label">Words<br>STRICT-SMALL</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">98M</span>
+                    <span class="stat-label">Words<br>STRICT</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">56%</span>
+                    <span class="stat-label">Transcribed<br>Speech</span>
+                </div>
+            </div>
+            <ul>
+                <li>Developmentally plausible corpora mimicking child language acquisition</li>
+                <li>Diverse sources: CHILDES, BNC, children's books, subtitles, Wikipedia</li>
+                <li>STRICT-SMALL ≈ child's linguistic exposure in formative years</li>
+                <li>STRICT ≈ linguistic input by age 12</li>
+            </ul>
+        </div>
+
+        <!-- Slide 5: Dataset Composition -->
+        <div class="slide">
+            <h2>BabyLM Dataset Composition</h2>
+            <div class="methodology-grid">
+                <div class="method-card">
+                    <h4>Speech-Based Sources (56%)</h4>
+                    <ul style="font-size: 1.1em;">
+                        <li>OpenSubtitles (31%)</li>
+                        <li>QCRI Educational (11%)</li>
+                        <li>BNC Dialogue (8%)</li>
+                        <li>CHILDES (5%)</li>
+                        <li>Switchboard (1%)</li>
+                    </ul>
+                </div>
+                <div class="method-card">
+                    <h4>Written Sources (44%)</h4>
+                    <ul style="font-size: 1.1em;">
+                        <li>Wikipedia (25%)</li>
+                        <li>Project Gutenberg (10%)</li>
+                        <li>Children's Books (9%)</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="highlight-box">
+                <p><strong>Key Feature:</strong> High percentage of child-directed speech (40%) creates unique training environment different from traditional LM data</p>
+            </div>
+        </div>
+
+        <!-- Slide 6: Methodology -->
+        <div class="slide">
+            <h2>Experimental Methodology</h2>
+            <div class="methodology-grid">
+                <div class="method-card">
+                    <h4>Model Architectures</h4>
+                    <ul style="font-size: 1.1em;">
+                        <li>Headless MLM & GPT variants</li>
+                        <li>Vanilla MLM & GPT baselines</li>
+                        <li>Based on BERT-base & Pythia-70M architecture</li>
+                        <li>Decoder without projection head,</li>
+                    </ul>
+                </div>
+                <div class="method-card">
+                    <h4>Training Setup</h4>
+                    <ul style="font-size: 1.1em;">
+                        <li>Batch sizes: 16 and 32</li>
+                        <li>BERT-base-uncased tokenizer</li>
+                        <li>Multiple GPU configurations</li>
+                        <li>STRICT-SMALL primary focus</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="highlight-box">
+                <p><strong>Comparative Analysis:</strong> Headless models remove traditional prediction heads while maintaining core transformer capabilities</p>
+            </div>
+        </div>
+
+        <!-- Slide 7: Evaluation Framework -->
+        <div class="slide">
+            <h2>Evaluation Framework</h2>
+            <div class="methodology-grid">
+                <div class="method-card">
+                    <h4>BLiMP Benchmark</h4>
+                    <ul style="font-size: 1.1em;">
+                        <li>67 linguistic phenomena paradigms</li>
+                        <li>Minimal pairs methodology</li>
+                        <li>Syntax, morphology, semantics</li>
+                        <li>No task-specific fine-tuning</li>
+                        <li>Raw linguistic knowledge assessment</li>
+                    </ul>
+                </div>
+                <div class="method-card">
+                    <h4>GLUE Benchmark</h4>
+                    <ul style="font-size: 1.1em;">
+                        <li>9 diverse NLU tasks</li>
+                        <li>Sentiment analysis</li>
+                        <li>Paraphrase detection</li>
+                        <li>Natural language inference</li>
+                        <li>Question answering</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="highlight-box">
+                <p><strong>Complementary Assessment:</strong> BLiMP focuses on grammatical competence while GLUE evaluates downstream task performance</p>
+            </div>
+        </div>
+
+        <!-- Slide 8: Experimental Configurations -->
+        <div class="slide">
+            <h2>Experimental Configurations</h2>
+            <h3>STRICT-SMALL Track Experiments</h3>
+            <ul>
+                <li><strong>Configuration 1:</strong> Headless vs Vanilla MLM (batch size 16)</li>
+                <li><strong>Configuration 2:</strong> Headless vs Vanilla MLM (batch size 32)</li>
+                <li><strong>Configuration 3:</strong> Headless vs Vanilla GPT (batch size 16)</li>
+                <li><strong>Configuration 4:</strong> Headless vs Vanilla GPT (batch size 32)</li>
+            </ul>
+            <div class="highlight-box">
+                <p><strong>Additional Exploration:</strong> STRICT track (98M words) for investigating scaling effects</p>
+            </div>
+            <div class="stats-container">
+                <div class="stat-box">
+                    <span class="stat-number">4</span>
+                    <span class="stat-label">Model<br>Variants</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">2</span>
+                    <span class="stat-label">Batch<br>Sizes</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">2</span>
+                    <span class="stat-label">Dataset<br>Tracks</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Research Contributions -->
+        <div class="slide">
+            <h2>Research Contributions</h2>
+            <div class="highlight-box">
+                <p style="font-size: 1.5em; color: #2c3e50; font-weight: 500;">Advancing understanding of efficient language model architectures</p>
+            </div>
+            <ul>
+                <li><strong>Architectural Innovation:</strong> First comprehensive evaluation of headless models on cognitively-inspired datasets</li>
+                <li><strong>Sample Efficiency:</strong> Investigating learning effectiveness with limited, developmentally plausible data</li>
+                <li><strong>Comparative Analysis:</strong> Systematic comparison across multiple model types and training configurations</li>
+                <li><strong>Cognitive Relevance:</strong> Bridging computational linguistics and language acquisition research</li>
+                <li><strong>Methodological Framework:</strong> Establishing evaluation protocols for sample-efficient pre-training</li>
+            </ul>
+        </div>
+
+        <!-- Slide 10: Implications & Future Work -->
+        <div class="slide">
+            <h2>Implications & Preliminary Findings</h2>
+            <div class="methodology-grid">
+                <div class="method-card">
+                    <h4>Theoretical Implications</h4>
+                    <ul style="font-size: 1.1em;">
+                        <li>Rethinking prediction head necessity</li>
+                        <li>Contrastive learning in NLP</li>
+                        <!-- <li>Cognitive plausibility in AI</li> -->
+                        <!-- <li>Sample efficiency principles</li> -->
+                    </ul>
+                </div>
+                <div class="method-card">
+                    <h4>Preliminary Findings</h4>
+                    <ul style="font-size: 1.1em;">
+                        <li>Increased Memory efficiency</li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="highlight-box">
+                <p><strong>Future Research:</strong> Scaling laws, architectural variations, and cross-linguistic validation of headless approaches</p>
+            </div>
+        </div>
+
+        <!-- Slide 11: Thank You -->
+        <div class="slide">
+            <h1>Thank You</h1>
+            <p style="font-size: 1.8em; color: #7f8c8d; margin: 40px 0;">Questions & Discussion</p>
+            <div class="highlight-box">
+                <p style="font-size: 1.3em; color: #2c3e50;">New Insights in Computational Lexicology:<br>Exploring Headless Language Models in Sample-Efficient Learning</p>
+            </div>
+            <p style="font-size: 1.2em; color: #95a5a6; margin-top: 30px;">Ino van de Wouw</p>
+            <p style="font-size: 1.1em; color: #bdc3c7;">MA Linguistics (Text Mining) | Vrije Universiteit Amsterdam</p>
+        </div>
+    </div>
+
+    <div class="slide-counter">
+        <span id="current-slide">1</span> / <span id="total-slides">11</span>
+    </div>
+
+    <div class="navigation">
+        <button class="nav-btn" id="prev-btn" onclick="previousSlide()">Previous</button>
+        <button class="nav-btn" id="next-btn" onclick="nextSlide()">Next</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        
+        document.getElementById('total-slides').textContent = totalSlides;
+
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            document.getElementById('current-slide').textContent = currentSlide + 1;
+            
+            // Update navigation buttons
+            document.getElementById('prev-btn').style.opacity = currentSlide === 0 ? '0.5' : '1';
+            document.getElementById('next-btn').style.opacity = currentSlide === totalSlides - 1 ? '0.5' : '1';
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                showSlide(currentSlide + 1);
+            }
+        }
+
+        function previousSlide() {
+            if (currentSlide > 0) {
+                showSlide(currentSlide - 1);
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                previousSlide();
+            }
+        });
+
+        // Initialize
+        showSlide(0);
+    </script>
+</body>
+</html>
