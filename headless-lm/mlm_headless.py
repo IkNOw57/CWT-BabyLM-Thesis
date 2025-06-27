@@ -29,6 +29,8 @@ parser.add_argument('--ckpt_path', nargs='?', const=None, type=str)
 parser.add_argument('--saved_ckpt_path')
 parser.add_argument("--ckpt_every", default=10000)
 parser.add_argument("--max_epochs",default=1000) #added myself
+parser.add_argument("--continue_training", default=False)
+parser.add_argument("--continue_training_path",default=None)
 
 args = parser.parse_args()
 
@@ -39,6 +41,8 @@ global_bs = int(args.global_bs)
 gpu_bs = int(args.gpu_bs)
 dataset = args.dataset
 hf_tokenizer = args.hf_tokenizer
+continue_training = args.continue_training
+continue_training_path = args.continue_training_path
 
 model_max_seq_len = 128 #args.config.pop("model_max_seq_len", 128)
 
@@ -69,8 +73,7 @@ accu_grad_batches = global_bs // (gpus_by_node * num_nodes * gpu_bs)
 print(f"Grad. accumulating factor: {accu_grad_batches}")
 
 
-datamodule = DataModule.from_datasets(dataset, train_batch_size=gpu_bs, infer_batch_size=gpu_bs,
-split_names=["train(:0.9999)", "train(0.9999:)"], from_disk=True, num_workers=0)
+datamodule = DataModule.from_datasets(dataset, train_batch_size=gpu_bs, infer_batch_size=gpu_bs,split_names= ['train','validation','test'], from_disk=False, num_workers=0)
 
 
 tokenizer = AutoTokenizer.from_pretrained(hf_tokenizer)
@@ -83,7 +86,11 @@ tokenizer.mask_token_id = 1
 lm_config.max_position_embeddings = model_max_seq_len
 lm_model = BertForMaskedLM(lm_config)
 
-
+if continue_training!= False:
+  os.environ['TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD']='1'
+  lm_model = torch.load(continue_training_path,map_location='cuda',weights_only=False)
+  
+  
 task = MlmHeadlessPretraining(
     tokenizer, lm_model, config = config
 )
@@ -92,12 +99,13 @@ version_name = run_name
 trainer = TaskTrainer(task, logger_args={"version": version_name})
 
 checkpoints = [
-  ModelCheckpoint(every_n_train_steps=ckpt_every, dirpath=f'{saved_ckpt_path}/{version_name}', save_top_k=-1),
-  ModelCheckpoint(every_n_train_steps=1000, dirpath=f'{saved_ckpt_path}/{version_name}_last', save_top_k=1)
+  ModelCheckpoint(every_n_train_steps=5000, dirpath=f'{saved_ckpt_path}/{version_name}', save_top_k=-1)#,
+ # ModelCheckpoint(every_n_train_steps=1000, dirpath=f'{saved_ckpt_path}/{version_name}_last', save_top_k=1)
 ]
 
 trainer.fit(
   datamodule,
+  accelerator='gpu',
   num_nodes=num_nodes,
   precision=precision,
   accumulate_grad_batches=accu_grad_batches,
@@ -107,6 +115,6 @@ trainer.fit(
   gradient_clip_val=1.0,
   benchmark=True,
   default_root_dir=f'{run_name}{saved_ckpt_path}/{version_name}',
-  ckpt_path=ckpt_path#,
-  # max_epochs=max_epochs,#added myself
+  ckpt_path=ckpt_path
+
 )

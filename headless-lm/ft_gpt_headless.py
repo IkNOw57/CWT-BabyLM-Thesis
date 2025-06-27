@@ -7,7 +7,7 @@ from pytorch_lightning.callbacks import ModelCheckpoint
 import psutil
 import argparse
 import torch
-
+os.environ['TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD']='1'
 print("CPU count: ", psutil.cpu_count())
 
 parser = argparse.ArgumentParser()
@@ -39,7 +39,7 @@ run_name = args.run_name
 mode = args.mode
 
 precision = args.precision
-ckpt_every = args.ckpt_every
+ckpt_every = int(args.ckpt_every)
 
 saved_ckpt_path = args.saved_ckpt_path
 
@@ -52,7 +52,7 @@ print(f"Grad. accumulating factor: {accu_grad_batches}")
 
 
 datamodule = DataModule.from_datasets(dataset, train_batch_size=gpu_bs, infer_batch_size=gpu_bs,
-split_names=["train(:0.9999)", "train(0.9999:)"], from_disk=True, num_workers=0)
+split_names= ['train','validation','test'], from_disk=False, num_workers=0)
 
 task_trainer = TaskTrainer.load_from_checkpoint(ckpt_path, map_location="cuda")
 
@@ -77,8 +77,8 @@ version_name = run_name
 trainer = TaskTrainer(task, logger_args={"version": version_name})
 
 checkpoints = [
-  ModelCheckpoint(every_n_train_steps=ckpt_every, dirpath=f'{saved_ckpt_path}/{version_name}', save_top_k=-1),
-  ModelCheckpoint(every_n_train_steps=1000, dirpath=f'{saved_ckpt_path}/{version_name}', save_top_k=1)
+  ModelCheckpoint(every_n_train_steps=ckpt_every, dirpath=f'{saved_ckpt_path}/{version_name}', save_top_k=-1)#,
+  #ModelCheckpoint(every_n_train_steps=1000, dirpath=f'{saved_ckpt_path}/{version_name}', save_top_k=1)
 ]
 
 trainer.fit(

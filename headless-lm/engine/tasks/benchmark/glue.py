@@ -18,23 +18,23 @@ _GLUE_TASK_CONFIG = {
     "rte": {
         'task_class': SentencePairClassification,
         'task_config': {
-            'num_class': 2,
-            'warmup_steps': 160
-        },
-        'nb_epochs': 20
+           'num_class': 2,
+           'warmup_steps': 160
+      },
+      'nb_epochs': 20
     },
     "sst2": {
         'task_class': SentenceClassification,
         'task_config': {
             'num_class': 2,
-            'warmup_steps': 4200
-        },
-        'nb_epochs': 20,
+           'warmup_steps': 4200
+       },
+      'nb_epochs': 20,
     },
     "cola": {
         'task_class': SentenceClassification,
         'task_config': {
-            'num_class': 2,
+           'num_class': 2,
             'warmup_steps': 530
         },
         'metric': 'mcc',
@@ -46,26 +46,26 @@ _GLUE_TASK_CONFIG = {
             'warmup_steps': 360
         },
         'metric': 'spearman',
-        'nb_epochs': 20,
+       'nb_epochs': 20,
     },
     "mrpc": {
         'task_class': SentencePairClassification,
+       'task_config': {
+           'num_class': 2,
+           'warmup_steps': 230
+       },
+      'nb_epochs': 20,
+   },
+   "qqp": {
+        'task_class': SentencePairClassification,
         'task_config': {
             'num_class': 2,
-            'warmup_steps': 230
-        },
-        'nb_epochs': 20,
+           'warmup_steps': 3400,
+           'text_keys': ['question1', 'question2']
+       },
     },
-    # "qqp": {
-    #     'task_class': SentencePairClassification,
-    #     'task_config': {
-    #         'num_class': 2,
-    #         'warmup_steps': 3400,
-    #         'text_keys': ['question1', 'question2']
-    #     },
-    # },
     "qnli": {
-        'task_class': SentencePairClassification,
+       'task_class': SentencePairClassification,
         'task_config': {
             'num_class': 2,
             'warmup_steps': 980,

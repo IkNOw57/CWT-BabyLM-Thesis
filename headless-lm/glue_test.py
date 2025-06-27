@@ -28,7 +28,11 @@ run_name = args.run_name
 #torchtrainer load 
 #task_trainer = torch.load(model_ckpt,map_location='cuda',weights_only=False)
 
-task_trainer = TaskTrainer.load_from_checkpoint(model_ckpt,map_location='cuda',weights_only=False)
+print(f"GPUs available: {torch.cuda.device_count()}")
+for i in range(torch.cuda.device_count()):
+  print(f"GPU: {i}: {torch.cuda.get_device_properties(i).total_memory / 1024**3:.1f} GB")
+
+task_trainer = TaskTrainer.load_from_checkpoint(model_ckpt, map_location='cuda:0',weights_only=False)
 
 tokenizer = task_trainer.task.tokenizer
 

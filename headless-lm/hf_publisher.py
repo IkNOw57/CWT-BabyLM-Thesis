@@ -1,7 +1,8 @@
 from engine.lit.lightning_module import TaskTrainer
 import argparse
 import torch.nn as nn
-
+import os
+os.environ['TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD']='1'
 parser = argparse.ArgumentParser()
 parser.add_argument("--hf_name")
 parser.add_argument("--model_ckpt")

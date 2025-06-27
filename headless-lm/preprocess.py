@@ -36,7 +36,7 @@ def main():
         return packed_batch.tolist()
 
     print("Loading dataset...")
-    ds = load_dataset(ds_name,ds_config,trust_remote_code = True)
+    ds = load_dataset(ds_name,ds_config)
 
 
 

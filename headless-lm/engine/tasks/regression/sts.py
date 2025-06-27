@@ -42,10 +42,14 @@ class TextualSimilarity(SentenceToScalar):
         batch_labels = batch_labels.float()
 
         representations = self.backbone(batch_sent)[0]
-        if representations.shape != torch.Size([32, 128, 768]): 
-            #print(f"\n\n check this if statement is met\n\n")
+        print(representations.shape)
+       #print(representations.shape)
+        if representations.shape != torch.Size([12, 128, 512]): 
+        #CHANGE THIS DEPENDING ON YOUR CONFIG, 512 is GPT, 728 is MLM
+        #print(f"\n\n check this if statement is met\n\n")
             outputs = self.backbone(batch_sent, output_hidden_states=True)
             representations = outputs.hidden_states[-1]
+            
             
         sentence_representations = self.pool_from_representations(representations)
 
