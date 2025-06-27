@@ -196,3 +196,6 @@ baby-lm-small.hf
 vanilla_MLM_b12/
 HMLM_b12
 .ipynb
+run_training_HMLM.sh
+run_training_vanilla_MLM.sh
+HGPT-b16-70M.sh
