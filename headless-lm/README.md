@@ -62,7 +62,9 @@ python gpt_headless.py \
     --run_name run-name-for-logging-and-ckpts \
     --saved_ckpt_path where-to-save-ckpts
 ```
+
 Other args include `--accelerator` (`hf`, `xformers` or `flash_attention`), `--ckpt_every` to pick checkpoint frequency, among others.
+```Note: accelerator xformers will result in an error depending on the precision of your floats.```
 
 3. (optional) Pick your checkpoint and publish it to HuggingFace. You'll need to use the `add_head` option to make it able to output tokens:
 ```python
