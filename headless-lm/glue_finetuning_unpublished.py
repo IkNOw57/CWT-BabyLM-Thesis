@@ -31,7 +31,7 @@ backbone = model
 def main():
     GlueBenchmark(
         tokenizer, backbone, logger='wandb', logger_args={'project': 'GLUE'}, train_batch_size=32, accumulate_grad_batches=1,
-        learning_rate=1e-5
+        learning_rate=1e-5, loss_type = 'emb'
     ) #,weighted_ce=True, weight_decay=0.01, shuffle=True
 
 if __name__ =='__main__':

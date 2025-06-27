@@ -2,6 +2,6 @@
     "dataset_name": "cambridge-climb/BabyLM",
     "dataset_config": "strict",
     "hf_tokenizer": "bert-base-uncased",
-    "output": "./dataset_storage/baby-lm.hf",
+    "output": "./dataset_storage/baby-lm-strict.hf",
     "max_seq_len": 2048
 }  

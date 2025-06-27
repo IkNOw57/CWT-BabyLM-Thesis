@@ -29,19 +29,25 @@ class SentencePairClassification(SentenceToScalar):
             nn.Linear(backbone.config.hidden_size, self.num_class,
                       device=self.device)
         )
-
+       
     def extract_input_info(self, input):
         return self.extract_input_sentences(input)
 
     def loss(self, input, **kwargs):
+        
         batch_sent, batch_labels, init_sents = input
-
         representations = self.backbone(batch_sent)[0]
 
+        if representations.shape != torch.Size([12, 128, 768]): 
+            outputs = self.backbone(batch_sent, output_hidden_states=True)
+            representations = outputs.hidden_states[-1]
+
+
+
         sentence_representations = self.pool_from_representations(representations)
-
+        
         predicted_logits = self.head(sentence_representations)
-
+        
         bce_loss = F.cross_entropy(
             predicted_logits.softmax(-1),
             batch_labels,

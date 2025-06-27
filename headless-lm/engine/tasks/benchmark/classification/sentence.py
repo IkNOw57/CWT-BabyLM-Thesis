@@ -40,7 +40,10 @@ class SentenceClassification(SentenceToScalar):
         batch_sent, batch_labels = input
 
         representations = self.backbone(batch_sent)[0]
-
+        if representations.shape != torch.Size([32, 128, 768]): 
+            #print(f"\n\n check this if statement is met\n\n")
+            outputs = self.backbone(batch_sent, output_hidden_states=True)
+            representations = outputs.hidden_states[-1]
         sentence_representations = self.pool_from_representations(representations)
 
         predicted_logits = self.head(sentence_representations)

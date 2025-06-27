@@ -56,14 +56,14 @@ _GLUE_TASK_CONFIG = {
         },
         'nb_epochs': 20,
     },
-    "qqp": {
-        'task_class': SentencePairClassification,
-        'task_config': {
-            'num_class': 2,
-            'warmup_steps': 3400,
-            'text_keys': ['question1', 'question2']
-        },
-    },
+    # "qqp": {
+    #     'task_class': SentencePairClassification,
+    #     'task_config': {
+    #         'num_class': 2,
+    #         'warmup_steps': 3400,
+    #         'text_keys': ['question1', 'question2']
+    #     },
+    # },
     "qnli": {
         'task_class': SentencePairClassification,
         'task_config': {
@@ -90,9 +90,10 @@ _GLUE_TASK_CONFIG = {
 class GlueBenchmark:
     def __init__(self, tokenizer, backbone, train_batch_size=8, infer_batch_size=32,
                  accumulate_grad_batches=4, version=None, logger='tensorboard', logger_args=None,
-                 learning_rate=None):
+                 learning_rate=None, loss_type = None):
         self.tokenizer = tokenizer
         self.backbone = backbone
+        self.loss_type = loss_type #
         logger_args = logger_args if logger_args else {}
 
         if logger == 'tensorboard':
