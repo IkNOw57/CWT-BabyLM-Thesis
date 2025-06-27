@@ -19,3 +19,4 @@ Key aspects of the challenge include:
 - **Strict-Small Track**: Models trained on ≤10M words
 - Evaluation on diverse linguistic tasks BLiMP & GLUE
 
+The folder headless-lm contains the explanation to install necessary dependencies and contains shell scripts to schedule scripts on a SLURM based HPC.
