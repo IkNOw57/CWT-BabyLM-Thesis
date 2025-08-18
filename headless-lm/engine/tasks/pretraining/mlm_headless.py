@@ -145,29 +145,29 @@ class MlmHeadlessPretraining(Task):
             embs = self.mlm_model.get_input_embeddings()
             target_input_embeddings = embs(input)[mask]
 
-            print(f"""
+#             print(f"""
 
-masked input: {masked_input}
+# masked input: {masked_input}
 
-mlm labels: {mlm_labels}
+# mlm labels: {mlm_labels}
 
-mask: {mask}
+# mask: {mask}
 
-embs: {embs}
+# embs: {embs}
 
-??:{_}
-""")        
+# ??:{_}
+# """)        
             emb_loss = self.contrastive_loss_fn(
                 emb_prediction,
                 target_input_embeddings
             )
-            print(f"""embedding loss: {emb_loss}
-last_hidden_state: {last_hidden_state}                
+#             print(f"""embedding loss: {emb_loss}
+# last_hidden_state: {last_hidden_state}                
 
-emb_prediction: {emb_prediction}
+# emb_prediction: {emb_prediction}
 
-target input embeddings: {target_input_embeddings}
-""")
+# target input embeddings: {target_input_embeddings}
+# """)
         else:
             emb_loss = 0.
         
