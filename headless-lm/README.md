@@ -1,16 +1,7 @@
 # headless-lm: Better and Faster LM pretraining
 
-[![Hugging Face](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Encoder-yellow)](https://huggingface.co/nthngdy/headless-bert-bs64-owt2)
-[![Hugging Face](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Decoder-yellow)](https://huggingface.co/nthngdy/headless-pythia-owt2-70m-ft)
-[![arXiv](https://img.shields.io/badge/arXiv-2309.08351-b31b1b.svg)](https://arxiv.org/abs/2309.08351)
-
-
 This repository contains training and evaluation code for the paper ["Headless Language Models: Learning without Predicting with Contrastive Weight Tying"](https://arxiv.org/abs/2309.08351).
 
-Paper abstract:
-> Self-supervised pre-training of language models usually consists in predicting probability distributions over extensive token vocabularies. In this study, we propose an innovative method that shifts away from probability prediction and instead focuses on reconstructing input embeddings in a contrastive fashion via Constrastive Weight Tying (CWT). We apply this approach to pretrain Headless Language Models in both monolingual and multilingual contexts. Our method offers practical advantages, substantially reducing training computational requirements by up to 20 times, while simultaneously enhancing downstream performance and data efficiency. We observe a significant +1.6 GLUE score increase and a notable +2.7 LAMBADA accuracy improvement compared to classical LMs within similar compute budgets.
-
-<br>
 
 ![](./imgs/hlm_schema.svg)
 
@@ -71,7 +62,9 @@ python gpt_headless.py \
     --run_name run-name-for-logging-and-ckpts \
     --saved_ckpt_path where-to-save-ckpts
 ```
+
 Other args include `--accelerator` (`hf`, `xformers` or `flash_attention`), `--ckpt_every` to pick checkpoint frequency, among others.
+```Note: accelerator xformers will result in an error depending on the precision of your floats.```
 
 3. (optional) Pick your checkpoint and publish it to HuggingFace. You'll need to use the `add_head` option to make it able to output tokens:
 ```python
