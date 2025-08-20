@@ -2,6 +2,12 @@
 
 This repository contains training and evaluation code for the paper ["Headless Language Models: Learning without Predicting with Contrastive Weight Tying"](https://arxiv.org/abs/2309.08351).
 
+As this experiment was done on a cluster that utilises Slurm resource management almost every Python script has an accompanying Shell script.
+If you wish to re-run this experiment on a Slurm cluster calling the scripts will initiate training.
+For Masked Language Model training the mlm_headless.py is called within each Shell script, for Causal Language Model training the gpt_headless.py is called in each Shell script. 
+
+If there are any questions don't refrain from contacting me @ inovandewouw@gmail.com
+
 
 ![](./imgs/hlm_schema.svg)
 
