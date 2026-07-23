@@ -1,0 +1,24 @@
+# Core ML / training
+torch==2.6.0
+torchvision==0.21.0
+torchaudio==2.6.0
+torchmetrics==0.11.3
+pytorch-lightning==2.0.7
+transformers==4.32.0
+accelerate==0.21.0
+xformers==0.0.29.post3
+
+# Data
+datasets==2.14.4
+sentencepiece==0.1.99
+zstandard
+
+# Hub / experiment tracking
+huggingface-hub==0.16.4
+wandb==0.13.10
+tensorboard==2.8.0
+
+# Utilities / analysis
+numpy==1.25.2
+plotly==5.7.0
+torchviz==0.0.2

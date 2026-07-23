@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "CWT-BabyLM: Contrastive Weight Tying on the BabyLM Challenge"
+type: software
+authors:
+  - family-names: "van de Wouw"
+    given-names: "Ino"
+    email: "inovandewouw@gmail.com"
+date-released: 2025-06-27
+license: MIT
+url: "https://github.com/IkNOw57/CWT-BabyLM-Thesis"
+references:
+  - type: article
+    title: "Headless Language Models: Learning without Predicting with Contrastive Weight Tying"
+    authors:
+      - family-names: "Godey"
+        given-names: "Nathan"
+      - family-names: "de la Clergerie"
+        given-names: "Éric"
+      - family-names: "Sagot"
+        given-names: "Benoît"
+    year: 2023
+    identifiers:
+      - type: other
+        value: "arXiv:2309.08351"
