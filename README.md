@@ -80,7 +80,7 @@ deviations across random seeds, and BLiMP phenomenon-level analysis.
 
 ```
 .
-├── docs/
+├── readings/
 │   └── thesis.pdf              # Full thesis write-up
 ├── scripts/
 │   ├── preprocess.py           # Tokenize & pack a HF dataset for pretraining
