@@ -28,9 +28,9 @@ This repository contains the training and evaluation code accompanying the thesi
 **["Learning with Less: Contrastive Weight Tying on the BabyLM Challenge"](docs/thesis.pdf)**
 (Ino van de Wouw, VU Amsterdam, 2025).
 
-The project studies **headless language models** — models pretrained with
+The project studies **headless language models**, models pretrained with
 **Contrastive Weight Tying (CWT)** ([Godey et al., 2024](https://arxiv.org/abs/2309.08351)) instead of a
-standard cross-entropy prediction head — on the
+standard cross-entropy prediction head, on the
 **[BabyLM Challenge](https://babylm.github.io/)**, a shared task focused on
 sample-efficient pretraining from developmentally plausible, human-scale corpora
 (≤ 100M words).
