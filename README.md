@@ -8,7 +8,6 @@
 
 [![Paper](https://img.shields.io/badge/paper-arXiv%3A2309.08351-b31b1b.svg)](https://arxiv.org/abs/2309.08351)
 [![Python](https://img.shields.io/badge/python-3.9%2B-blue.svg)](#requirements)
-[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![SLURM](https://img.shields.io/badge/scheduler-SLURM-orange.svg)](#running-on-a-slurm-cluster)
 
 [Overview](#overview) •
@@ -25,7 +24,7 @@
 ## Overview
 
 This repository contains the training and evaluation code accompanying the thesis
-**["Learning with Less: Contrastive Weight Tying on the BabyLM Challenge"](docs/thesis.pdf)**
+**["Learning with Less: Contrastive Weight Tying on the BabyLM Challenge"](https://github.com/inovdwouw/Sample-Efficient-Language-Modelling/blob/main/docs/thesis.pdf)**
 (Ino van de Wouw, VU Amsterdam, 2025).
 
 The project studies **headless language models**, models pretrained with
@@ -51,7 +50,7 @@ the **GLUE** and **BLiMP** benchmarks.
 
 ## Results
 
-*(600M and 2B pretraining-token checkpoints; full breakdown in the [thesis](docs/thesis.pdf), Chapter 4)*
+*(600M and 2B pretraining-token checkpoints; full breakdown in the [thesis](https://github.com/inovdwouw/Sample-Efficient-Language-Modelling/blob/main/docs/thesis.pdf), Chapter 4)*
 
 | Dataset | Architecture | GLUE avg. (headless) | GLUE avg. (vanilla) | Training speed-up (headless) |
 |---|---|---|---|---|
@@ -73,7 +72,7 @@ the **GLUE** and **BLiMP** benchmarks.
 - Absolute performance limits appear to stem primarily from the **constrained
   size of the BabyLM corpora**, not from the headless architecture itself.
 
-See the [thesis PDF](docs/thesis.pdf) for full task-by-task results, standard
+See the [thesis PDF](https://github.com/inovdwouw/Sample-Efficient-Language-Modelling/blob/main/docs/thesis.pdf) for full task-by-task results, standard
 deviations across random seeds, and BLiMP phenomenon-level analysis.
 
 ## Repository Structure
